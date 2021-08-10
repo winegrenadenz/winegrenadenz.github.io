@@ -10,27 +10,136 @@
         };
         </style>
     </head>
+    <style>
+        
+        .logo{
+                display: inline-block;
+                width: 100%;
+                margin: auto;
+                align-self:auto;
+        }
+
+        .header{
+            font-size:x-large;
+            font-weight: bold;
+            margin-left:2px;
+            text-align: center;
+        }
+
+        .connectButton {
+            background-color: rgb(91, 43, 97); 
+            border: none;
+            color: rgb(219, 208, 217);
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 2px 1px;
+            cursor: pointer;
+            border-radius: 1em;
+        }  
+        
+        .connectButton:hover {
+        color: rgb(219, 208, 217);;
+        background-color: #863473;;
+        }
+
+        .scanButton {
+            background-color: #033336; 
+            border: none;
+            color: rgb(219, 208, 217);
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 2px 1px;
+            cursor: pointer;
+            border-radius: 1em;
+        }  
+        
+        .scanButton:hover {
+        color: rgb(219, 208, 217);;
+        background-color: #098383;;
+        }
+
+        .button {
+            border: 1px solid #0066cc;
+            background-color: #045672;
+            color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 2px 1px;
+            cursor: pointer;
+            border-radius: 1em;
+            }
+
+        .button:hover {
+            border: 1px solid #0099cc;
+            background-color: #057e96;
+            color: #ffffff;
+            padding: 10px;
+            }
+
+        .button:disabled,
+        .button[disabled]{
+            border: 1px solid #999999;
+            background-color: #cccccc;
+            color: #666666;
+            }
+
+        .formdiv{
+                margin: 0.5em;
+                padding: 0.5em;
+                background-color: #ffffff;
+                align-content: center;
+                border-radius: 1em;
+                display: flex;
+                justify-content: center;
+            }
+
+    </style>
     <body>
-        <h2>Accuro WiFi Configuration</h2>
 
-        <form id="form_connect">
-            <input id="connect_btn" type="submit" value="Connect to Argon">
-        </form>
+        <div class="logo">
+            <div class ="header"> <img src="logo.png" alt="Logo"> </div>
+            <div class="header"><h2>WiFi Configuration</h2></div>
+        </div>
+        
 
-        <form id="form_wifi_scan" style="display: none; margin-top: 10px;">
-            <input id="wifi_scan_btn" type="submit" value="Scan for Networks" disabled>
-        </form>
+        <div>
+            <div class="formdiv">
+                <form id="form_connect" >
+                    <input id="connect_btn" type="submit" value="Connect to Device" class = "connectButton">
+                </form>
+            </div>
 
-        <form id="form_wifi_config" style="display: none">
-            <p>Network: <select id="ssid" size=1 placeholder="WiFi SSID" style="min-width: 150px;" disabled></select></p>
-            <p id="password_p">Password: <input id="password" type="password" size=17 placeholder="Password" disabled></p>
-            <p><input id="submit_credentials_btn" type="submit" value="Connect to Network" disabled></p>
-        </form>
-    
-        <h3>Log</h3>
-        <div id="output" class="output" style="border:1px">
-            <pre id="log"></pre>
-        </div> 
+
+            <div class="formdiv">
+                <form id="form_wifi_scan" style="display: none; margin-top: 10px;">
+                    <input id="wifi_scan_btn" type="submit" value="Scan for Networks" disabled class ="scanButton">
+                </form>
+            </div>
+
+            <div class="formdiv">
+                <form id="form_wifi_config" style="display: none">
+                    <p>Network: <select id="ssid" size=1 placeholder="WiFi SSID" style="min-width: 150px;" disabled></select></p>
+                    <p id="password_p">Password: <input id="password" type="password" size=17 placeholder="Password" disabled></p>
+                    <p><input id="submit_credentials_btn" type="submit" value="Connect to Network" disabled class ="button" ></p>
+                </form>
+            </div>
+       </div>
+
+       <h3>Log</h3>
+       <div id="output" class="output" style="border:1px">
+           <pre id="log"></pre>
+       </div>
+
+
 
         <script>
 
@@ -144,7 +253,7 @@
                 document.getElementById('form_wifi_scan').style.display = "block";
                 document.getElementById('form_wifi_config').style.display = "block";
                 document.getElementById('wifi_scan_btn').disabled = false;
-                document.getElementById('connect_btn').value = "Disconnect from Argon";
+                document.getElementById('connect_btn').value = "Disconnect from Device";
             })
             .catch(error => {
                 Logger.log('Argh! ' + error);
@@ -216,7 +325,7 @@
             var password = document.getElementById("password");
             password.value = "";
 
-            document.getElementById('connect_btn').value = "Connect to Argon";
+            document.getElementById('connect_btn').value = "Connect to Device";
 
             ssids = [];
         }
